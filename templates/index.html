@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">🜲 RAKSHANETRA AI COMMAND</div>
+        <div class="nav-glow">● SYSTEM ACTIVE ● FRAUD MONITORING ENABLED ●</div>
+    </div>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            🚨 RakshaNetra Threat Feed: Suspicious UPI Handshake Detected • High Velocity Card Pattern Flagged •
+            Multiple OTP Breach Attempts • Neural Fraud Scanner Active • Kavach Layer Monitoring...
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>💳 RakshaNetra Intelligent Payment Surveillance Dashboard</h1>
+            <p>Anomaly Detection + Classification Engine Active</p>
+        </div>
+
+        <div class="cards">
+            <div class="card total">
+                <h2>Total Transactions</h2>
+                <p>{{total}}</p>
+            </div>
+
+            <div class="card fraud">
+                <h2>Fraudulent</h2>
+                <p>{{fraud}}</p>
+            </div>
+
+            <div class="card legit">
+                <h2>Legitimate</h2>
+                <p>{{legit}}</p>
+            </div>
+        </div>
+
+        <div class="predict-box">
+            <h2>🔍 Live Transaction Fraud Predictor</h2>
+            <form method="POST">
+                <input type="text" name="time" placeholder="Enter Time" required>
+                <input type="text" name="amount" placeholder="Enter Amount" required>
+                <button type="submit">Predict Transaction</button>
+            </form>
+            <div class="result">{{result}}</div>
+        </div>
+
+        <div class="table-box">
+            <h2>🚨 Recent Transaction Alerts</h2>
+            <table>
+                <tr>
+                    <th>Txn ID</th>
+                    <th>Mode</th>
+                    <th>User ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+
+                {% for row in alerts %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>₹{{row[3]}}</td>
+                    <td class="{% if row[4]=='FRAUD ALERT' %}danger{% else %}safe{% endif %}">
+                        {{row[4]}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="chart-section">
+            <h2>📊 Fraud Analytics Visualizations</h2>
+            <div class="chart-grid">
+                <img src="{{ url_for('static', filename='chart1.png') }}">
+                <img src="{{ url_for('static', filename='chart2.png') }}">
+                <img src="{{ url_for('static', filename='chart3.png') }}">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
